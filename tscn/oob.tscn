@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://lwhclyiqlwrb"]
+
+[ext_resource type="Script" uid="uid://b84u5pswydnyr" path="res://gd/out_of_bounds.gd" id="1_xofcq"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ip2ov"]
+
+[node name="oob" type="Area2D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_xofcq")
+
+[node name="oobCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_ip2ov")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv75gmavnobsr"]
+
+[ext_resource type="Texture2D" uid="uid://c3xl3bs4molkb" path="res://resources/1bit slime platformer/black_bg/box_b.png" id="1_0fk4q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d68qw"]
+size = Vector2(8, 8)
+
+[node name="crate" type="RigidBody2D"]
+collision_layer = 32
+collision_mask = 32
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0fk4q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d68qw")

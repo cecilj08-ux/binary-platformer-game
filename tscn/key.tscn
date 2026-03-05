@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://vuygg7fn20ut"]
+
+[ext_resource type="Texture2D" uid="uid://dbqyvstlqynnc" path="res://resources/1bit slime platformer/alpha_bg/key.png" id="1_7qgb6"]
+[ext_resource type="Script" uid="uid://mep76ste7kim" path="res://gd/key.gd" id="2_7qgb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bn28"]
+size = Vector2(8, 3)
+
+[node name="key" type="Sprite2D"]
+texture = ExtResource("1_7qgb6")
+script = ExtResource("2_7qgb6")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_7bn28")
+debug_color = Color(0.09019608, 0.64705884, 0, 0.41960785)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 1.5)
+lifetime = 2.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

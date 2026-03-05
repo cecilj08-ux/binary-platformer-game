@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl588vixk7e67"]
+
+[ext_resource type="Texture2D" uid="uid://cw84udi3aqnav" path="res://resources/1bit slime platformer/alpha_bg/coin.png" id="1_cbksl"]
+[ext_resource type="Script" uid="uid://buoqip70jrlkl" path="res://gd/coin.gd" id="2_7bn28"]
+
+[sub_resource type="Animation" id="Animation_7bn28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o03qj"]
+resource_name = "shine"
+length = 1.33
+loop_mode = 1
+step = 0.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3333, 0.6666, 0.9999),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ighy"]
+_data = {
+&"RESET": SubResource("Animation_7bn28"),
+&"ani": SubResource("Animation_o03qj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bn28"]
+size = Vector2(4, 6)
+
+[node name="coin" type="Sprite2D"]
+texture = ExtResource("1_cbksl")
+hframes = 2
+vframes = 2
+script = ExtResource("2_7bn28")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6ighy")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7bn28")
+debug_color = Color(0.09019608, 0.64705884, 0, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

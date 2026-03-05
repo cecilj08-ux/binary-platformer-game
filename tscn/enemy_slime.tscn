@@ -1,0 +1,143 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxe5yfrayctoo"]
+
+[ext_resource type="Script" uid="uid://fwdg2yy5fjer" path="res://gd/enemy_slime.gd" id="1_waapy"]
+[ext_resource type="Texture2D" uid="uid://dfsgx4ecsxtdg" path="res://resources/1bit slime platformer/alpha_bg/slime2_idle_a.png" id="2_n3j74"]
+[ext_resource type="Texture2D" uid="uid://7d6o6lolj4o8" path="res://resources/1bit slime platformer/alpha_bg/slime2_walk_a.png" id="3_0y1p5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_080n8"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_4btga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_n3j74")]
+}
+
+[sub_resource type="Animation" id="Animation_0y1p5"]
+resource_name = "idle"
+length = 1.33
+loop_mode = 1
+step = 0.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3333, 0.6666, 0.9999),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_n3j74")]
+}
+
+[sub_resource type="Animation" id="Animation_srapi"]
+resource_name = "walk"
+length = 1.33
+loop_mode = 1
+step = 0.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3333, 0.6666, 0.9999),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_0y1p5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_srapi"]
+_data = {
+&"RESET": SubResource("Animation_4btga"),
+&"idle": SubResource("Animation_0y1p5"),
+&"walk": SubResource("Animation_srapi")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3j74"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0y1p5"]
+size = Vector2(8, 7)
+
+[node name="enemy_slime" type="CharacterBody2D"]
+collision_layer = 20
+script = ExtResource("1_waapy")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_080n8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_n3j74")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_srapi")
+}
+
+[node name="detection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+shape = SubResource("CircleShape2D_n3j74")
+debug_color = Color(0.82314396, 0.39966968, 0, 0.41960785)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_0y1p5")
+debug_color = Color(1, 0.015686275, 0.023529412, 0.41960785)
+
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]

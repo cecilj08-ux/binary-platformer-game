@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://biqbr0yoxjp21"]
+
+[ext_resource type="Texture2D" uid="uid://bu8cqjsc6ty15" path="res://resources/1bit slime platformer/alpha_bg/door.png" id="1_v4ngw"]
+[ext_resource type="Script" uid="uid://cdy2kha06lw2v" path="res://gd/door.gd" id="2_mairw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mairw"]
+size = Vector2(2, 2)
+
+[node name="door" type="Sprite2D"]
+texture = ExtResource("1_v4ngw")
+vframes = 2
+script = ExtResource("2_mairw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_mairw")
+debug_color = Color(0.64705884, 0.52156866, 0, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
