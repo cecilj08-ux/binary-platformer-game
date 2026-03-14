@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cg1t3k8myfc46"]
+[gd_scene format=4 uid="uid://cg1t3k8myfc46"]
 
 [ext_resource type="TileSet" uid="uid://b3vljxh3uv2w" path="res://tileset.tres" id="1_yf6xp"]
 [ext_resource type="PackedScene" uid="uid://lwhclyiqlwrb" path="res://tscn/oob.tscn" id="2_yf6xp"]
@@ -10,45 +10,45 @@
 [ext_resource type="PackedScene" uid="uid://b0uyr5dgxj0r0" path="res://tscn/button.tscn" id="7_icesj"]
 [ext_resource type="PackedScene" uid="uid://bv75gmavnobsr" path="res://tscn/crate.tscn" id="9_2eo3t"]
 
-[node name="world" type="TileMapLayer"]
-tile_map_data = PackedByteArray("AAD9/wIAAAABAAoAAAD+/wIAAAABAAoAAAD+/wMAAAABAAsAAAD9/wMAAAABAAsAAAD8/wMAAAAAAAsAAAD8/wIAAAAAAAoAAAD8/wEAAAAAAAkAAAD9/wEAAAABAAkAAAD+/wEAAAABAAkAAAD//wIAAAABAAoAAAD//wMAAAABAAsAAAD//wEAAAABAAkAAAAAAAIAAAABAAoAAAAAAAMAAAABAAsAAAAAAAEAAAABAAkAAAABAAIAAAABAAoAAAABAAMAAAABAAsAAAABAAEAAAABAAkAAAACAAIAAAABAAoAAAACAAMAAAABAAsAAAACAAEAAAABAAkAAAADAAIAAAACAAoAAAADAAMAAAACAAsAAAADAAEAAAACAAkAAAD7////AAACAAoAAAD7//7/AAACAAkAAAAFAP//AAABAAoAAAAGAP//AAACAAoAAAAGAAAAAAACAAsAAAAFAAAAAAABAAsAAAAEAAAAAAAAAAsAAAAEAP//AAAAAAoAAAAEAP7/AAAAAAkAAAAFAP7/AAABAAkAAAAGAP7/AAACAAkAAAAIAPz/AAABAAoAAAAJAPz/AAACAAoAAAAJAP3/AAACAAsAAAAIAP3/AAABAAsAAAAHAP3/AAAAAAsAAAAHAPz/AAAAAAoAAAAHAPv/AAAAAAoAAAAIAPv/AAABAAoAAAAJAPv/AAACAAoAAAD3//z/AAABAAoAAAD4//z/AAACAAoAAAD4//3/AAACAAsAAAD3//3/AAABAAsAAAD2//3/AAAAAAsAAAD2//z/AAAAAAoAAAD2//v/AAAAAAoAAAD3//v/AAABAAoAAAD4//v/AAACAAoAAAD9//n/AAABAAoAAAD+//n/AAABAAoAAAD+//r/AAABAAsAAAD9//r/AAABAAsAAAD8//r/AAAAAAsAAAD8//n/AAAAAAoAAAD8//j/AAAAAAkAAAD9//j/AAABAAkAAAD+//j/AAABAAkAAAD///n/AAABAAoAAAD///r/AAABAAsAAAD///j/AAABAAkAAAAAAPn/AAABAAoAAAAAAPr/AAABAAsAAAAAAPj/AAABAAkAAAABAPn/AAABAAoAAAABAPr/AAABAAsAAAABAPj/AAABAAkAAAACAPn/AAABAAoAAAACAPr/AAABAAsAAAACAPj/AAABAAkAAAADAPn/AAACAAoAAAADAPr/AAACAAsAAAADAPj/AAACAAkAAAD2//r/AAAAAAoAAAD3//r/AAABAAoAAAD4//r/AAACAAoAAAD2//n/AAAAAAoAAAD3//n/AAABAAoAAAD4//n/AAACAAoAAAD2//j/AAAAAAkAAAD3//j/AAABAAkAAAD4//j/AAACAAkAAAAHAPr/AAAAAAoAAAAIAPr/AAABAAoAAAAJAPr/AAACAAoAAAAHAPn/AAAAAAoAAAAIAPn/AAABAAoAAAAJAPn/AAACAAoAAAAHAPj/AAAAAAkAAAAIAPj/AAABAAkAAAAJAPj/AAACAAkAAAD5//7/AAAAAAkAAAD6//7/AAABAAkAAAD7/wAAAAACAAsAAAD5////AAAAAAoAAAD5/wAAAAAAAAsAAAD6////AAABAAoAAAD6/wAAAAABAAsAAAA=")
+[node name="world" type="TileMapLayer" unique_id=877232229]
+tile_map_data = PackedByteArray("AAD9/wIAAAABAAoAAAD+/wIAAAABAAoAAAD+/wMAAAABAAsAAAD9/wMAAAABAAsAAAD8/wMAAAAAAAsAAAD8/wIAAAAAAAoAAAD8/wEAAAAAAAkAAAD9/wEAAAABAAkAAAD+/wEAAAABAAkAAAD//wIAAAABAAoAAAD//wMAAAABAAsAAAD//wEAAAABAAkAAAAAAAIAAAABAAoAAAAAAAMAAAABAAsAAAAAAAEAAAABAAkAAAABAAIAAAABAAoAAAABAAMAAAABAAsAAAABAAEAAAABAAkAAAACAAIAAAABAAoAAAACAAMAAAABAAsAAAACAAEAAAABAAkAAAADAAIAAAACAAoAAAADAAMAAAACAAsAAAADAAEAAAACAAkAAAD7////AAACAAoAAAD7//7/AAACAAkAAAAFAP//AAABAAoAAAAGAP//AAACAAoAAAAGAAAAAAACAAsAAAAFAAAAAAABAAsAAAAEAAAAAAAAAAsAAAAEAP//AAAAAAoAAAAEAP7/AAAAAAkAAAAFAP7/AAABAAkAAAAGAP7/AAACAAkAAAAIAPz/AAABAAoAAAAJAPz/AAACAAoAAAAJAP3/AAACAAsAAAAIAP3/AAABAAsAAAAHAP3/AAAAAAsAAAAHAPz/AAAAAAoAAAAHAPv/AAAAAAoAAAAIAPv/AAABAAoAAAAJAPv/AAACAAoAAAD3//z/AAABAAoAAAD4//z/AAACAAoAAAD4//3/AAACAAsAAAD3//3/AAABAAsAAAD2//3/AAAAAAsAAAD2//z/AAAAAAoAAAD2//v/AAAAAAoAAAD3//v/AAABAAoAAAD4//v/AAACAAoAAAD9//n/AAABAAoAAAD+//n/AAABAAoAAAD+//r/AAABAAsAAAD9//r/AAABAAsAAAD8//r/AAAAAAsAAAD8//n/AAAAAAoAAAD8//j/AAAAAAkAAAD9//j/AAABAAkAAAD+//j/AAABAAkAAAD///n/AAABAAoAAAD///r/AAABAAsAAAD///j/AAABAAkAAAAAAPn/AAABAAoAAAAAAPr/AAABAAsAAAAAAPj/AAABAAkAAAABAPn/AAABAAoAAAABAPr/AAABAAsAAAABAPj/AAABAAkAAAACAPn/AAABAAoAAAACAPr/AAABAAsAAAACAPj/AAABAAkAAAADAPn/AAACAAoAAAADAPr/AAACAAsAAAADAPj/AAACAAkAAAD2//r/AAAAAAoAAAD3//r/AAABAAoAAAD4//r/AAACAAoAAAD2//n/AAAAAAoAAAD3//n/AAABAAoAAAD4//n/AAACAAoAAAD2//j/AAAAAAkAAAD3//j/AAABAAkAAAD4//j/AAACAAkAAAAHAPr/AAAAAAoAAAAIAPr/AAABAAoAAAAJAPr/AAAEAAoAAAD5//7/AAAAAAkAAAD6//7/AAABAAkAAAD7/wAAAAACAAsAAAD5////AAAAAAoAAAD5/wAAAAAAAAsAAAD6////AAABAAoAAAD6/wAAAAABAAsAAAAIAPn/AAABAAoAAAAJAPn/AAACAAoAAAAHAPn/AAAGAAoAAAAHAPj/AAAAAAkAAAAIAPj/AAAFAAsAAAAJAPj/AAACAAkAAAA=")
 tile_set = ExtResource("1_yf6xp")
 
-[node name="oob" parent="." instance=ExtResource("2_yf6xp")]
+[node name="oob" parent="." unique_id=194799056 instance=ExtResource("2_yf6xp")]
 unique_name_in_owner = true
 position = Vector2(0, 200)
 
-[node name="coins" type="Node" parent="."]
+[node name="coins" type="Node" parent="." unique_id=1367595544]
 unique_name_in_owner = true
 
-[node name="coin" parent="coins" instance=ExtResource("3_tfipb")]
+[node name="coin" parent="coins" unique_id=16156392 instance=ExtResource("3_tfipb")]
 position = Vector2(0, -24)
 
-[node name="keys" type="Node" parent="."]
+[node name="keys" type="Node" parent="." unique_id=1599819628]
 unique_name_in_owner = true
 
-[node name="key" parent="keys" node_paths=PackedStringArray("activates") instance=ExtResource("4_apnhf")]
+[node name="key" parent="keys" unique_id=180038527 node_paths=PackedStringArray("activates") instance=ExtResource("4_apnhf")]
 position = Vector2(-44, -24)
 activates = NodePath("../../door")
 
-[node name="key2" parent="keys" node_paths=PackedStringArray("activates") instance=ExtResource("4_apnhf")]
+[node name="key2" parent="keys" unique_id=413559916 node_paths=PackedStringArray("activates") instance=ExtResource("4_apnhf")]
 position = Vector2(44, -24)
 activates = NodePath("../../door")
 
-[node name="enemies" type="Node" parent="."]
+[node name="enemies" type="Node" parent="." unique_id=1365317989]
 
-[node name="enemy_slime" parent="enemies" instance=ExtResource("5_tfipb")]
+[node name="enemy_slime" parent="enemies" unique_id=2029322627 instance=ExtResource("5_tfipb")]
 position = Vector2(-15, -68)
 
-[node name="door" parent="." instance=ExtResource("4_icesj")]
+[node name="door" parent="." unique_id=574512626 instance=ExtResource("4_icesj")]
 position = Vector2(0, -68)
 
-[node name="button" parent="." node_paths=PackedStringArray("activates") instance=ExtResource("7_icesj")]
+[node name="button" parent="." unique_id=192456169 node_paths=PackedStringArray("activates") instance=ExtResource("7_icesj")]
 position = Vector2(21, 4)
 activates = NodePath("../door")
 
-[node name="player" parent="." instance=ExtResource("5_2eo3t")]
-position = Vector2(0, 4)
+[node name="player" parent="." unique_id=1218267728 instance=ExtResource("5_2eo3t")]
+position = Vector2(-22, 4)
 
-[node name="crate" parent="." instance=ExtResource("9_2eo3t")]
-position = Vector2(-13, -4)
+[node name="crate" parent="." unique_id=146070000 instance=ExtResource("9_2eo3t")]
+position = Vector2(-11, -4)
