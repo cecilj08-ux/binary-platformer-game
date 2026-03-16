@@ -25,6 +25,8 @@ var walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slim
 # TODO: make the sprite change when hanging on a wall
 var flipped_walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_walk_h_flipped.png")
 
+func apply_gravity(delta) -> void: velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
+
 func death() -> void:
 	set_collision_layer_value(5, false)
 	$playerHitbox.set_collision_mask_value(5,false)
@@ -43,9 +45,10 @@ func _ready() -> void: camera.limit_bottom = %oob.position.y-(new_scale.y*8)
 
 func _physics_process(delta: float) -> void:
 # Gravity
-	if (not is_on_floor()) and (not is_on_wall()): velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
+	if (not is_on_floor()) and (not is_on_wall()): apply_gravity(delta)
 	elif is_on_wall_only():
-		velocity.y = 30 if Input.is_action_pressed("down") else 0
+		if velocity.y < 0 and Input.is_action_pressed("up"): apply_gravity(delta)
+		else: velocity.y = 30 if Input.is_action_pressed("down") else 0
 		was_on_wall = true
 	elif is_on_floor(): was_on_wall = false
 	if velocity.y > fallspeed_cap: velocity.y = fallspeed_cap

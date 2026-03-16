@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://q25i057n0jd5"]
+[gd_scene format=3 uid="uid://q25i057n0jd5"]
 
 [ext_resource type="Script" uid="uid://w4ltqoaukerh" path="res://gd/player.gd" id="1_u4c7w"]
 [ext_resource type="Texture2D" uid="uid://dlvs07gnvhxmp" path="res://resources/1bit slime platformer/hybrid_bg/slime_idle_h.png" id="2_u4c7w"]
@@ -142,40 +142,38 @@ region = Rect2(0, 0, 5, 5)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6sl1v"]
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" unique_id=794086276]
 collision_layer = 54
 script = ExtResource("1_u4c7w")
 
-[node name="playerSprite" type="Sprite2D" parent="."]
+[node name="playerSprite" type="Sprite2D" parent="." unique_id=713142459]
 texture = ExtResource("2_u4c7w")
 hframes = 2
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="playerSprite"]
-libraries = {
-&"": SubResource("AnimationLibrary_08a46")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="playerSprite" unique_id=957333527]
+libraries/ = SubResource("AnimationLibrary_08a46")
 
-[node name="playerCollision" type="CollisionShape2D" parent="."]
+[node name="playerCollision" type="CollisionShape2D" parent="." unique_id=913928945]
 shape = SubResource("RectangleShape2D_ip2ov")
 
-[node name="playerHitbox" type="Area2D" parent="."]
+[node name="playerHitbox" type="Area2D" parent="." unique_id=669966532]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="playerHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerHitbox" unique_id=487081757]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_u4c7w")
 debug_color = Color(1, 0.016198115, 0.022938538, 0.41960785)
 
-[node name="coyoteTimer" type="Timer" parent="."]
+[node name="coyoteTimer" type="Timer" parent="." unique_id=860478476]
 wait_time = 0.1
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1112769505]
 zoom = Vector2(4, 4)
 
-[node name="eatingParticles" type="CPUParticles2D" parent="."]
+[node name="eatingParticles" type="CPUParticles2D" parent="." unique_id=262667829]
 position = Vector2(0, 1)
 emitting = false
 texture = SubResource("AtlasTexture_hsluc")
@@ -191,7 +189,7 @@ initial_velocity_max = 150.0
 scale_amount_min = 0.5
 scale_amount_max = 0.75
 
-[node name="oobParticles" type="CPUParticles2D" parent="."]
+[node name="oobParticles" type="CPUParticles2D" parent="." unique_id=1347757751]
 position = Vector2(0, 1)
 emitting = false
 texture = SubResource("AtlasTexture_hsluc")
@@ -209,11 +207,11 @@ initial_velocity_max = 250.0
 scale_amount_min = 0.5
 scale_amount_max = 0.75
 
-[node name="crateDetection" type="Area2D" parent="."]
+[node name="crateDetection" type="Area2D" parent="." unique_id=223418210]
 collision_layer = 33
 collision_mask = 33
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="crateDetection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="crateDetection" unique_id=345009954]
 position = Vector2(0, 5)
 shape = SubResource("WorldBoundaryShape2D_6sl1v")
 

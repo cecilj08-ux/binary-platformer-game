@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxe5yfrayctoo"]
+[gd_scene format=3 uid="uid://cxe5yfrayctoo"]
 
 [ext_resource type="Script" uid="uid://fwdg2yy5fjer" path="res://gd/enemy_slime.gd" id="1_waapy"]
 [ext_resource type="Texture2D" uid="uid://dfsgx4ecsxtdg" path="res://resources/1bit slime platformer/alpha_bg/slime2_idle_a.png" id="2_n3j74"]
@@ -107,34 +107,32 @@ radius = 50.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0y1p5"]
 size = Vector2(8, 7)
 
-[node name="enemy_slime" type="CharacterBody2D"]
-collision_layer = 20
+[node name="enemy_slime" type="CharacterBody2D" unique_id=937087587]
+collision_layer = 52
 script = ExtResource("1_waapy")
 
-[node name="collision" type="CollisionShape2D" parent="."]
+[node name="collision" type="CollisionShape2D" parent="." unique_id=855399104]
 shape = SubResource("RectangleShape2D_080n8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1580044052]
 texture = ExtResource("2_n3j74")
 hframes = 2
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_srapi")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=2109320414]
+libraries/ = SubResource("AnimationLibrary_srapi")
 
-[node name="detection" type="Area2D" parent="."]
+[node name="detection" type="Area2D" parent="." unique_id=240215450]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection" unique_id=1808473164]
 shape = SubResource("CircleShape2D_n3j74")
 debug_color = Color(0.82314396, 0.39966968, 0, 0.41960785)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1866371956]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1484099510]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0y1p5")
 debug_color = Color(1, 0.015686275, 0.023529412, 0.41960785)
