@@ -21,7 +21,7 @@ hframes = 2
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1291791596]
-polygon = PackedVector2Array(-4, 4, 4, 4, 1, 1, -1, 1)
+polygon = PackedVector2Array(-5, 5, 5, 5, 1, 2, -1, 2)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=172190804]
 collision_layer = 4

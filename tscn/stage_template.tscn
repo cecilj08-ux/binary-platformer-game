@@ -48,6 +48,7 @@ position = Vector2(21, 4)
 activates = NodePath("../door")
 
 [node name="player" parent="." unique_id=1218267728 instance=ExtResource("5_2eo3t")]
+unique_name_in_owner = true
 position = Vector2(-22, 4)
 
 [node name="crate" parent="." unique_id=146070000 instance=ExtResource("9_2eo3t")]

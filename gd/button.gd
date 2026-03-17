@@ -9,7 +9,6 @@ var total_collisions := 0
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if (body is Player and body.new_scale >= scale) or (body is CharacterBody2D or RigidBody2D and body.scale >= scale):
 		total_collisions += 1
-		print(total_collisions)
 		sprite.frame = 1
 		pressed = true
 		set_collision_layer_value(1, false)
@@ -24,7 +23,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D or RigidBody2D and pressed and not one_shot:
 		total_collisions -= 1
-		print(total_collisions)
 		if total_collisions > 0: return
 		sprite.frame = 0
 		pressed = false

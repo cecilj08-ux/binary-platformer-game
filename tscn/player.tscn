@@ -144,6 +144,7 @@ region = Rect2(0, 0, 5, 5)
 
 [node name="player" type="CharacterBody2D" unique_id=794086276]
 collision_layer = 54
+collision_mask = 33
 script = ExtResource("1_u4c7w")
 
 [node name="playerSprite" type="Sprite2D" parent="." unique_id=713142459]

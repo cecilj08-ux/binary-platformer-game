@@ -22,8 +22,7 @@ var was_on_wall := false
 
 var jump_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_jump_h.png")
 var walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_walk_h.png")
-# TODO: make the sprite change when hanging on a wall
-var flipped_walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_walk_h_flipped.png")
+var wall_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_wall_h.png")
 
 func apply_gravity(delta) -> void: velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
 
@@ -81,6 +80,25 @@ func _physics_process(delta: float) -> void:
 			elif velocity.y < 100: sprite.frame = 2
 			elif velocity.y > 100: sprite.frame = 3
 		elif direction: ani.play("walk")
+	# FIXME. And then get rid of the above code and credit your friend again.
+		#var on_Wall
+		#if not is_on_wall_only():
+			#on_Wall = false
+		#if not is_on_floor():
+			#if is_on_wall_only() and on_Wall == false:
+				#ani.stop()
+				#sprite.flip_h = not sprite.flip_h
+				#sprite.texture = wall_sprite
+				#sprite.frame = 4
+				#on_Wall = true
+			#if not is_on_wall_only():
+				#ani.stop()
+				#sprite.texture = jump_sprite
+				#if velocity.y < -100: sprite.frame = 1
+				#elif velocity.y < 100: sprite.frame = 2
+				#elif velocity.y > 100: sprite.frame = 3
+			#elif not is_on_wall_only() and direction: ani.play("walk")
+
 # Size scaling
 	if new_scale != scale:
 		scale = lerp(scale, new_scale, delta*4)
