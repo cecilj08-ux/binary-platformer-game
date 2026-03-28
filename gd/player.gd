@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 @onready var ani := $playerSprite/AnimationPlayer
 @onready var coyoteTime := $coyoteTimer
 @onready var eatingParticles := $eatingParticles
-@onready var oobParticles := $oobParticles
+@onready var deathParticles := $deathParticles
 @onready var camera := $Camera2D
 @onready var new_scale := scale # NOTE: Use this instead of scale unless its visual-related
 
@@ -26,17 +26,21 @@ var wall_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slim
 
 func apply_gravity(delta) -> void: velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
 
-func death() -> void:
+func death(cause := "unspecified") -> void:
 	set_collision_layer_value(5, false)
 	$playerHitbox.set_collision_mask_value(5,false)
 	sprite.visible = false
 	can_walk = false
 	can_jump = false
 	velocity = Vector2.ZERO
-	oobParticles.amount = round(8*scale.x)
-	oobParticles.initial_velocity_min /= scale.x
-	oobParticles.initial_velocity_max /= scale.x
-	oobParticles.restart()
+	deathParticles.amount = round(8*scale.x)
+	deathParticles.initial_velocity_min /= scale.x
+	deathParticles.initial_velocity_max /= scale.x
+	if cause == "enemy":
+		deathParticles.initial_velocity_min /= 2
+		deathParticles.initial_velocity_max /= 2
+		deathParticles.gravity *= 2
+	deathParticles.restart()
 	await get_tree().create_timer(2.5).timeout
 	get_tree().reload_current_scene.call_deferred()
 
@@ -104,6 +108,9 @@ func _physics_process(delta: float) -> void:
 		scale = lerp(scale, new_scale, delta*4)
 	# TODO: See if this can be done in a less hacky way
 		if scale + Vector2(0.000001,0.000001) == new_scale: scale += Vector2(0.000001,0.000001)
+# Camera
+	if camera.position != Vector2.ZERO:
+		camera.position = lerp(camera.position, Vector2.ZERO, delta)
 
 func _on_coyote_timer_timeout() -> void: was_on_wall = false
 
@@ -118,7 +125,8 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 			body.queue_free()
 		else:
 			camera.reparent(body)
-			death()
+			#camera.position = Vector2.ZERO
+			death("enemy")
 
 func _on_crate_detection_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D:

@@ -1,10 +1,16 @@
 extends Enemy
 
+var direction := 0.0
+var lerpWeight : = 0.0
+var acceleration := 5
+var friction := 6
+
 var jump_sprite := preload("res://resources/1bit slime platformer/alpha_bg/slime2_jump_a.png")
 
 func _physics_process(delta: float) -> void:
-	gravitation(delta)
+	apply_gravity(delta)
 # Animation
+	ani.speed_scale = 1+abs(velocity.x)*0.075
 	if is_on_floor(): ani.play("walk" if target else "idle")
 	elif not is_on_floor():
 		ani.stop()
@@ -16,8 +22,11 @@ func _physics_process(delta: float) -> void:
 	if target:
 		aggressive = target.new_scale < scale
 		sprite.flip_h = true if target.position.x < position.x else false
-		position.x = move_toward(position.x, target.position.x, delta*(speed if aggressive else -speed))
-	# Jumping. I wish this if statement wasn't so long...
-		if position.distance_to(target.position) < 40 and target.position.y+10 < position.y and can_jump and aggressive: velocity.y = -jump_power
+		if position.distance_to(target.position) < 40 and target.position.y+(8*scale.y) < position.y and can_jump and aggressive: velocity.y = -jump_power
 	can_jump = is_on_floor_only()
+	if target: direction = -1 if target.position < position else 1
+	else: direction = 0
+	if not aggressive: direction *= -1
+	lerpWeight = delta*(acceleration if direction else friction)
+	velocity.x = lerp(velocity.x, direction*speed, lerpWeight)
 	move_and_slide()
