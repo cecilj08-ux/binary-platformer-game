@@ -1,5 +1,9 @@
 extends Enemy
 
+@onready var left_ray := $leftRay
+@onready var right_ray := $rightRay
+@onready var detection := $detection/CollisionShape2D
+
 var direction := 0.0
 var lerpWeight : = 0.0
 var acceleration := 5
@@ -21,9 +25,10 @@ func _physics_process(delta: float) -> void:
 # Movement
 	if target:
 		aggressive = target.new_scale < scale
-		sprite.flip_h = true if target.position.x < position.x else false
-		if position.distance_to(target.position) < 40 and target.position.y+(8*scale.y) < position.y and can_jump and aggressive: velocity.y = -jump_power
-	can_jump = is_on_floor_only()
+		sprite.flip_h = target.position.x < position.x
+		if position.distance_to(target.position) < detection.shape.radius*0.6 and target.position.y+(8*scale.y) < position.y and can_jump and aggressive: velocity.y = -jump_power
+		elif position.distance_to(target.position) < detection.shape.radius and (left_ray.is_colliding() or right_ray.is_colliding()) and can_jump: velocity.y = -jump_power
+	can_jump = is_on_floor()
 	if target: direction = -1 if target.position < position else 1
 	else: direction = 0
 	if not aggressive: direction *= -1

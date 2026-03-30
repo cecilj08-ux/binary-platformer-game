@@ -13,8 +13,8 @@ var cancel_velocity := false
 @onready var player := %player
 
 func _physics_process(_delta: float) -> void:
-	cancel_velocity = true if left_ray.is_colliding() and right_ray.is_colliding() else false
-	player.set_collision_mask_value(6, true if cancel_velocity else false)
+	cancel_velocity = left_ray.is_colliding() and right_ray.is_colliding()
+	player.set_collision_mask_value(6, cancel_velocity)
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	if cancel_velocity: linear_velocity = Vector2.ZERO

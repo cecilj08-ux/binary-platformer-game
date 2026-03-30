@@ -109,7 +109,6 @@ size = Vector2(8, 7)
 
 [node name="enemy_slime" type="CharacterBody2D" unique_id=937087587]
 collision_layer = 52
-collision_mask = 33
 script = ExtResource("1_waapy")
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=855399104]
@@ -137,6 +136,12 @@ debug_color = Color(0.82314396, 0.39966968, 0, 0.41960785)
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0y1p5")
 debug_color = Color(1, 0.015686275, 0.023529412, 0.41960785)
+
+[node name="leftRay" type="RayCast2D" parent="." unique_id=136277637]
+target_position = Vector2(-8, 0)
+
+[node name="rightRay" type="RayCast2D" parent="." unique_id=310263660]
+target_position = Vector2(8, 0)
 
 [connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
