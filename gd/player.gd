@@ -125,7 +125,6 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 			body.queue_free()
 		else:
 			camera.reparent(body)
-			#camera.position = Vector2.ZERO
 			death("enemy")
 
 func _on_crate_detection_body_entered(body: Node2D) -> void:
