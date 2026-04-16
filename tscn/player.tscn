@@ -131,7 +131,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ip2ov"]
-size = Vector2(8, 8)
+size = Vector2(8, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4c7w"]
 size = Vector2(8, 7)
@@ -140,11 +140,8 @@ size = Vector2(8, 7)
 atlas = ExtResource("5_6sl1v")
 region = Rect2(0, 0, 5, 5)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6sl1v"]
-
 [node name="player" type="CharacterBody2D" unique_id=794086276]
 collision_layer = 54
-collision_mask = 33
 script = ExtResource("1_u4c7w")
 
 [node name="playerSprite" type="Sprite2D" parent="." unique_id=713142459]
@@ -156,6 +153,7 @@ vframes = 2
 libraries/ = SubResource("AnimationLibrary_08a46")
 
 [node name="playerCollision" type="CollisionShape2D" parent="." unique_id=913928945]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_ip2ov")
 
 [node name="playerHitbox" type="Area2D" parent="." unique_id=669966532]
@@ -208,15 +206,5 @@ initial_velocity_max = 250.0
 scale_amount_min = 0.5
 scale_amount_max = 0.75
 
-[node name="crateDetection" type="Area2D" parent="." unique_id=223418210]
-collision_layer = 33
-collision_mask = 33
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="crateDetection" unique_id=345009954]
-position = Vector2(0, 5)
-shape = SubResource("WorldBoundaryShape2D_6sl1v")
-
 [connection signal="body_entered" from="playerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="timeout" from="coyoteTimer" to="." method="_on_coyote_timer_timeout"]
-[connection signal="body_entered" from="crateDetection" to="." method="_on_crate_detection_body_entered"]
-[connection signal="body_exited" from="crateDetection" to="." method="_on_crate_detection_body_exited"]

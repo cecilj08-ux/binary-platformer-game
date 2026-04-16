@@ -53,3 +53,9 @@ position = Vector2(-14, -68)
 
 [node name="crate" parent="." unique_id=146070000 instance=ExtResource("9_2eo3t")]
 position = Vector2(-11, -4)
+
+[node name="crate2" parent="." unique_id=1040855189 instance=ExtResource("9_2eo3t")]
+position = Vector2(-44, -32)
+
+[node name="crate3" parent="." unique_id=2059398006 instance=ExtResource("9_2eo3t")]
+position = Vector2(-98, -71)

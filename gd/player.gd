@@ -126,12 +126,3 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 		else:
 			camera.reparent(body)
 			death("enemy")
-
-func _on_crate_detection_body_entered(body: Node2D) -> void:
-	if body is RigidBody2D:
-		body.set_collision_layer_value(1, true)
-		body.set_collision_mask_value(1, true)
-func _on_crate_detection_body_exited(body: Node2D) -> void:
-	if body is RigidBody2D:
-		body.set_collision_layer_value(1, false)
-		body.set_collision_mask_value(1, false)
