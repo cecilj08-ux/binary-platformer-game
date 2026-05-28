@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://bv75gmavnobsr"]
+
+[ext_resource type="Texture2D" uid="uid://c3xl3bs4molkb" path="res://resources/1bit slime platformer/black_bg/box_b.png" id="1_0fk4q"]
+[ext_resource type="Script" uid="uid://v6ompc8rr8jl" path="res://gd/crate.gd" id="1_d68qw"]
+[ext_resource type="Texture2D" uid="uid://bqa7k6jgmptrl" path="res://resources/custom/ice.png" id="3_pyiyw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d68qw"]
+resource_local_to_scene = true
+friction = 0.5
+
+[sub_resource type="Animation" id="Animation_wgly0"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_0fk4q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dkbrr"]
+resource_name = "ice_ani"
+length = 1.6666666
+loop_mode = 1
+step = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_pyiyw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667, 1, 1.3333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lmtms"]
+_data = {
+&"RESET": SubResource("Animation_wgly0"),
+&"ice_ani": SubResource("Animation_dkbrr")
+}
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d68qw"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_d68qw"]
+a = Vector2(4, -4)
+b = Vector2(-4, -4)
+
+[node name="crate" type="RigidBody2D" unique_id=1040855189]
+collision_layer = 36
+collision_mask = 40
+physics_material_override = SubResource("PhysicsMaterial_d68qw")
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_d68qw")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1973205903]
+texture = ExtResource("1_0fk4q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sprite" unique_id=827964390]
+libraries/ = SubResource("AnimationLibrary_lmtms")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1496307591]
+polygon = PackedVector2Array(-3.5, -4, 3.5, -4, 4, -3.5, 4, 3.5, 3.5, 4, -3.5, 4, -4, 3.5, -4, -3.5)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1351513522]
+occluder = SubResource("OccluderPolygon2D_d68qw")
+
+[node name="leftRay" type="RayCast2D" parent="." unique_id=1243195588]
+position = Vector2(0, 3)
+target_position = Vector2(-4, 0)
+collision_mask = 32
+
+[node name="rightRay" type="RayCast2D" parent="." unique_id=1114542725]
+position = Vector2(0, 3)
+target_position = Vector2(4, 0)
+collision_mask = 32
+
+[node name="topCollision" type="StaticBody2D" parent="." unique_id=10407517]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="topCollision" unique_id=601068619]
+shape = SubResource("SegmentShape2D_d68qw")
+one_way_collision = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

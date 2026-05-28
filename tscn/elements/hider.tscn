@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c4lnt2rbq5opv"]
+
+[ext_resource type="TileSet" uid="uid://b3vljxh3uv2w" path="res://tileset.tres" id="1_tcixr"]
+
+[node name="hider" type="TileMapLayer" unique_id=1813610698]
+tile_set = ExtResource("1_tcixr")
+navigation_enabled = false

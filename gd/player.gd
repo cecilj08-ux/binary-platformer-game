@@ -2,55 +2,90 @@ class_name Player extends CharacterBody2D
 
 @onready var sprite := $playerSprite
 @onready var ani := $playerSprite/AnimationPlayer
-@onready var coyoteTime := $coyoteTimer
-@onready var eatingParticles := $eatingParticles
-@onready var deathParticles := $deathParticles
+@onready var coyoteTime := $coyoteTime
+@onready var bleedTime := $bleedTime
+@onready var eatParticles := $eatParticles
+@onready var bleedParticles := $bleedParticles
+@onready var fallParticles := $fallParticles
 @onready var camera := $Camera2D
-@onready var new_scale := scale # NOTE: Use this instead of scale unless its visual-related
+@onready var new_scale := scale # NOTE: Use this instead of scale for calculations
 
 const jump_power := 220
 const acceleration := 5
-const friction := 6
 const fallspeed_cap := 600
 
+var friction := 6
 var speed := 120.0
 var direction := 0.0
 var lerpWeight := 0.0
+
 var can_walk := true
 var can_jump := false
 var was_on_wall := false
+var can_stick := true
+var dead := false
 
-var jump_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_jump_h.png")
-var walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_walk_h.png")
-var wall_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_wall_h.png")
+const jump_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_jump_h.png")
+const walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_walk_h.png")
+const wall_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_wall_h.png")
 
-func apply_gravity(delta) -> void: velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
+func apply_gravity(delta: float) -> void: velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
 
-func death(cause := "unspecified") -> void:
+func calculate_vector_areas(original: Vector2, added: Vector2, subtract := false) -> Vector2:
+	var original_area = original.x*original.y
+	var added_area = added.x*added.y
+	if subtract: added_area *= -1
+	return Vector2(sqrt(original_area+added_area), sqrt(original_area+added_area))
+
+func spike_1() -> void:
+	if new_scale != Vector2(0,0):
+		if new_scale.x <= sqrt(3):
+			new_scale = calculate_vector_areas(new_scale, Vector2.ONE, true)
+			new_scale.x = sqrt(round(new_scale.x**2))
+			new_scale.y = sqrt(round(new_scale.y**2))
+		else:
+			new_scale = calculate_vector_areas(new_scale,new_scale-Vector2.ONE, true)
+			new_scale.x = sqrt(floor(new_scale.x**2))
+			new_scale.y = sqrt(floor(new_scale.y**2))
+
+func death(cause = "unspecified") -> void:
+	dead = true
+	Global.can_pause = false
 	set_collision_layer_value(5, false)
 	$playerHitbox.set_collision_mask_value(5,false)
 	sprite.visible = false
 	can_walk = false
 	can_jump = false
 	velocity = Vector2.ZERO
-	deathParticles.amount = round(8*scale.x)
-	deathParticles.initial_velocity_min /= scale.x
-	deathParticles.initial_velocity_max /= scale.x
-	if cause == "enemy":
-		deathParticles.initial_velocity_min /= 2
-		deathParticles.initial_velocity_max /= 2
-		deathParticles.gravity *= 2
-	deathParticles.restart()
+	eatParticles.amount = round(8*scale.x)
+	fallParticles.amount = round(8*scale.x)
+	if cause is Enemy:
+		camera.reparent(cause)
+		emit_particle(eatParticles)
+	elif cause == "fall": emit_particle(fallParticles)
+	elif cause == "small":
+		bleedParticles.emitting = false
+		emit_particle(eatParticles)
+	else: emit_particle(eatParticles)
 	await get_tree().create_timer(2.5).timeout
+	Global.can_pause = true
 	get_tree().reload_current_scene.call_deferred()
 
-func _ready() -> void: camera.limit_bottom = %oob.position.y-(new_scale.y*8)
+func emit_particle(particle: GPUParticles2D) -> void:
+	var emitted_particles := particle.duplicate()
+	emitted_particles.position = position
+	get_parent().add_child(emitted_particles)
+	emitted_particles.restart()
+	await emitted_particles.finished
+	emitted_particles.queue_free()
+
+func _ready() -> void: camera.limit_bottom = get_tree().get_first_node_in_group("void").position.y-(new_scale.y*8)
 
 func _physics_process(delta: float) -> void:
 # Gravity
-	if (not is_on_floor()) and (not is_on_wall()): apply_gravity(delta)
-	elif is_on_wall_only():
-		if velocity.y < 0 and Input.is_action_pressed("up"): apply_gravity(delta)
+	apply_gravity(delta)
+	if is_on_wall_only() and can_stick:
+		if velocity.y < 0 and Input.is_action_pressed("up"): pass
 		else: velocity.y = 30 if Input.is_action_pressed("down") else 0
 		was_on_wall = true
 	elif is_on_floor(): was_on_wall = false
@@ -58,13 +93,14 @@ func _physics_process(delta: float) -> void:
 # Coyote Timing
 	if is_on_floor() or is_on_wall(): coyoteTime.start()
 	can_jump = coyoteTime.time_left != 0 and velocity.y >= 0 and sprite.visible
-# Jump
+# Jump and drop
 	if Input.is_action_just_pressed("up") and can_jump:
-		if is_on_wall_only():
+		if is_on_wall_only() and can_stick:
 			sprite.flip_h = not sprite.flip_h
-			velocity += Vector2(-120 if sprite.flip_h else 120, -jump_power*0.66)
-		elif was_on_wall: velocity += Vector2(-120 if sprite.flip_h else 120, -(jump_power*0.66) - velocity.y)
-		else: velocity.y = -jump_power
+			velocity += Vector2(-speed - (scale.x-1)*25 if sprite.flip_h else speed + (scale.x-1)*25, -jump_power*0.66)
+		elif was_on_wall and can_stick: velocity += Vector2(-speed - (scale.x-1)*25 if sprite.flip_h else speed + (scale.x-1)*25, -(jump_power*0.66) - velocity.y)
+		elif can_stick or is_on_floor(): velocity.y = -(jump_power + (scale.x-1)*25)
+	set_collision_mask_value(4, not Input.is_action_pressed("down"))
 # Movement
 	direction = Input.get_axis("left", "right") if can_walk else 0.0
 	lerpWeight = delta*(acceleration if direction else friction)
@@ -74,55 +110,54 @@ func _physics_process(delta: float) -> void:
 	if velocity.x < 0 and not is_on_wall(): sprite.flip_h = true
 	elif velocity.x > 0 and not is_on_wall(): sprite.flip_h = false
 	ani.speed_scale = 1+abs(velocity.x)*0.075
-	if (velocity.x < 10 and velocity.x > -10) and is_on_floor(): ani.play("idle")
-	else:
-	# Midair Animation
-		if not is_on_floor():
-			ani.stop()
+	if is_on_floor():
+		if abs(velocity.x) < 10 and is_on_floor(): ani.play("idle")
+		elif direction: ani.play("walk")
+	elif not is_on_floor():
+		ani.stop()
+		if is_on_wall() and can_stick:
+			sprite.texture = wall_sprite
+			if velocity.y < -10: sprite.frame = 0
+			elif velocity.y <= 0: sprite.frame = 1
+			elif Input.is_action_pressed("down"): sprite.frame = 2
+		else:
 			sprite.texture = jump_sprite
 			if velocity.y < -100: sprite.frame = 1
 			elif velocity.y < 100: sprite.frame = 2
 			elif velocity.y > 100: sprite.frame = 3
-		elif direction: ani.play("walk")
-	# FIXME. And then get rid of the above code and credit your friend again.
-		#var on_Wall
-		#if not is_on_wall_only():
-			#on_Wall = false
-		#if not is_on_floor():
-			#if is_on_wall_only() and on_Wall == false:
-				#ani.stop()
-				#sprite.flip_h = not sprite.flip_h
-				#sprite.texture = wall_sprite
-				#sprite.frame = 4
-				#on_Wall = true
-			#if not is_on_wall_only():
-				#ani.stop()
-				#sprite.texture = jump_sprite
-				#if velocity.y < -100: sprite.frame = 1
-				#elif velocity.y < 100: sprite.frame = 2
-				#elif velocity.y > 100: sprite.frame = 3
-			#elif not is_on_wall_only() and direction: ani.play("walk")
-
 # Size scaling
-	if new_scale != scale:
-		scale = lerp(scale, new_scale, delta*4)
-	# TODO: See if this can be done in a less hacky way
-		if scale + Vector2(0.000001,0.000001) == new_scale: scale += Vector2(0.000001,0.000001)
+	if new_scale != scale: scale = scale.move_toward(new_scale, delta)
+	if scale <= Vector2(0.25,0.25) and not dead: death("small")
 # Camera
-	if camera.position != Vector2.ZERO:
-		camera.position = lerp(camera.position, Vector2.ZERO, delta)
+	if camera.position != Vector2.ZERO: camera.position = lerp(camera.position, Vector2.ZERO, delta)
+	#camera.position = lerp(camera.position, get_local_mouse_position()/4, delta*5)
 
 func _on_coyote_timer_timeout() -> void: was_on_wall = false
 
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
-	if body is Enemy:
+	if body is TileMapLayer:
+		if body.name == "ice":
+			can_stick = false
+			friction = 0
+			speed *= 1.2
+		elif body.name == "spikes":
+			emit_particle(eatParticles)
+		elif body.name == "instakill": death()
+		elif "hider" in body.name: body.visible = false
+	elif body is Enemy:
 		if new_scale >= body.scale:
-			if new_scale: new_scale += body.scale/2
-			else: new_scale = scale + body.scale/2
-			speed /= new_scale.x * 0.8
-			camera.limit_bottom = %oob.position.y-(new_scale.y*8)
-			eatingParticles.restart()
+			new_scale = calculate_vector_areas(new_scale, body.scale)
+			camera.limit_bottom = get_tree().get_first_node_in_group("void").position.y-(new_scale.y*8)
+			emit_particle(eatParticles)
 			body.queue_free()
-		else:
-			camera.reparent(body)
-			death("enemy")
+		else: death(body)
+func _on_player_hitbox_body_exited(body: Node2D) -> void:
+	if body is TileMapLayer:
+		if body.name == "ice":
+			can_stick = true
+			friction = 6
+			speed /= 1.2
+		elif body.name == "spikes":
+			bleedParticles.restart()
+			spike_1()
+		elif "hider" in body.name: body.visible = true

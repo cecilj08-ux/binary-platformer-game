@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://0pgc4uiqmf6a"]
+
+[ext_resource type="Script" uid="uid://cob13op6nlgpa" path="res://gd/menu.gd" id="1_qud60"]
+
+[node name="menu" type="Control" unique_id=1383209616]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qud60")
+
+[node name="buttons" type="VBoxContainer" parent="." unique_id=274122181]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -33.0
+offset_right = 21.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(21, 33)
+
+[node name="Start" type="Button" parent="buttons" unique_id=406897205]
+layout_mode = 2
+text = "Start"
+
+[node name="Quit" type="Button" parent="buttons" unique_id=1414342959]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="buttons/Quit" to="." method="_on_quit_pressed"]

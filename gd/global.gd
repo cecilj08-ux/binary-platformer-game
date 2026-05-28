@@ -1,11 +1,19 @@
 extends Node
-var stage := 0
-var title_screen := true
+var destination := 1
+var title_screen := false
+var can_pause := true
+var p_scale := Vector2.ONE
+const pause_menu_scene := preload("res://tscn/uis/pause_menu.tscn")
+const player_scene := preload("res://tscn/elements/player.tscn")
 
-func _ready() -> void: process_mode = Node.PROCESS_MODE_ALWAYS
-func _physics_process(_delta: float) -> void:
-# Temporary way to close the game. Change to the pause script below later on.
-	if Input.is_action_just_pressed("esc"): get_tree().quit()
-	#if Input.is_action_just_pressed("esc") and not title_screen: get_tree().paused = not get_tree().paused
-# Oh yeah, decide what you'll do with this too
-	#DisplayServer.window_set_title(str(Engine.get_frames_per_second()) + " FPS")
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	var pause_menu := pause_menu_scene.instantiate()
+	get_tree().current_scene.add_sibling.call_deferred(pause_menu)
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("reset") and not title_screen:
+		get_tree().paused = false
+		Global.can_pause = true
+		get_tree().reload_current_scene()
+	if Input.is_action_just_pressed("esc") and can_pause and not title_screen:
+		get_tree().paused = not get_tree().paused

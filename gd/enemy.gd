@@ -3,9 +3,10 @@
 @onready var ani := $Sprite2D/AnimationPlayer
 @onready var sprite := $Sprite2D
 
-@export var speed := 60
+@export var speed := 80
 @export var jump_power := 220
 @export var fallspeed_cap := 600
+@export var detection_range := 50
 
 var target = null
 var can_jump := true

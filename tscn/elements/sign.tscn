@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bewaygt2x1gkw"]
+
+[ext_resource type="Texture2D" uid="uid://5b1yoy4ipeo7" path="res://resources/custom/sign.png" id="1_82xh6"]
+[ext_resource type="Script" uid="uid://bf65f4ydn1jo3" path="res://gd/sign.gd" id="2_ttoi2"]
+[ext_resource type="Texture2D" uid="uid://bdp86ag2hf5bs" path="res://resources/1Bit_UI_pack_byBatuhan/1-bit_UI_byBatuhanK.png" id="3_hyg2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttoi2"]
+size = Vector2(8, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w62q7"]
+atlas = ExtResource("3_hyg2a")
+region = Rect2(96, 83, 39, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hyg2a"]
+texture = SubResource("AtlasTexture_w62q7")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="sign" type="Sprite2D" unique_id=863917873]
+texture = ExtResource("1_82xh6")
+script = ExtResource("2_ttoi2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=174128412]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=904868809]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ttoi2")
+debug_color = Color(0.09019608, 0.64705884, 0, 0.41960785)
+
+[node name="textBox" type="PanelContainer" parent="." unique_id=1199464333]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -30.0
+offset_right = 96.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(100, 22)
+theme_override_styles/panel = SubResource("StyleBoxTexture_hyg2a")
+
+[node name="text" type="Label" parent="textBox" unique_id=2147241394]
+custom_minimum_size = Vector2(192, 14)
+layout_mode = 2
+text = "Text goes here."
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+visible_characters_behavior = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

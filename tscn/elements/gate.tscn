@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://crfqdt0pbxmnx"]
+
+[ext_resource type="Script" uid="uid://bip5er5um02f5" path="res://gd/gate.gd" id="1_4cb02"]
+[ext_resource type="Texture2D" uid="uid://c4dwgqyg80j1f" path="res://resources/1bit slime platformer/gate_w.png" id="1_nje3v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cb02"]
+resource_local_to_scene = true
+size = Vector2(8, 8)
+
+[node name="gate" type="StaticBody2D" unique_id=603030376]
+collision_layer = 33
+script = ExtResource("1_4cb02")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1810803914]
+texture_repeat = 2
+texture = ExtResource("1_nje3v")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
+
+[node name="collisionBox" type="CollisionShape2D" parent="." unique_id=241122374]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_4cb02")
