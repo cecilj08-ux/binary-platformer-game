@@ -27,6 +27,7 @@ position = Vector2(0, 200)
 [node name="gate" parent="gates" unique_id=603030376 instance=ExtResource("5_36cw6")]
 position = Vector2(-8, -24)
 height = 4
+stage = 9
 
 [node name="gate2" parent="gates" unique_id=486033913 instance=ExtResource("5_36cw6")]
 position = Vector2(40, -24)
@@ -111,7 +112,8 @@ writing = "World 0
 
 [node name="sign2" parent="signs" unique_id=310736985 instance=ExtResource("6_lq2k8")]
 position = Vector2(20, 4)
-writing = "World 1"
+writing = "World 1
+(coming soon)"
 
 [node name="sign3" parent="signs" unique_id=155795457 instance=ExtResource("6_lq2k8")]
 position = Vector2(68, 4)
