@@ -22,10 +22,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 # Sprite Resizing
-	if opening == not inverted:
-		sprite.region_rect.size.y = move_toward(sprite.region_rect.size.y, 8, open_speed*0.1)
-	else:
-		sprite.region_rect.size.y = move_toward(sprite.region_rect.size.y, height*8, close_speed*0.1)
+	if opening == not inverted: sprite.region_rect.size.y = move_toward(sprite.region_rect.size.y, 8, open_speed*0.1)
+	else: sprite.region_rect.size.y = move_toward(sprite.region_rect.size.y, height*8, close_speed*0.1)
 # Collision Resizing
 	collision_box.shape.size.y = sprite.region_rect.size.y
 	collision_box.position.y = sprite.region_rect.size.y/2

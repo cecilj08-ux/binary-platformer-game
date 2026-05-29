@@ -31,7 +31,7 @@ func _ready() -> void:
 			open()
 
 func _on_enter_box_body_entered(body: Node2D) -> void:
-	if body is Player and opened and body.new_scale <= scale:
+	if body is Player and opened and body.new_scale <= scale and body.new_scale > Vector2(0.25,0.25):
 		Global.can_pause = false
 		get_tree().paused = true
 		Global.destination = destination_id

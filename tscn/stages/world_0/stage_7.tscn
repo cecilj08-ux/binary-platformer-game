@@ -1,29 +1,29 @@
-[gd_scene format=4 uid="uid://b5x2f38u7jja8"]
+[gd_scene format=4 uid="uid://d2u6jxc40uxag"]
 
-[ext_resource type="Script" uid="uid://c1u23bk10sx8j" path="res://gd/world.gd" id="1_ftrh7"]
-[ext_resource type="TileSet" uid="uid://b3vljxh3uv2w" path="res://tileset.tres" id="1_yf6xp"]
-[ext_resource type="PackedScene" uid="uid://lwhclyiqlwrb" path="res://tscn/elements/void.tscn" id="2_yf6xp"]
-[ext_resource type="PackedScene" uid="uid://biqbr0yoxjp21" path="res://tscn/elements/door.tscn" id="4_icesj"]
-[ext_resource type="PackedScene" uid="uid://c4lnt2rbq5opv" path="res://tscn/elements/hider.tscn" id="5_ftrh7"]
+[ext_resource type="Script" uid="uid://c1u23bk10sx8j" path="res://gd/world.gd" id="1_h2jvi"]
+[ext_resource type="TileSet" uid="uid://b3vljxh3uv2w" path="res://tileset.tres" id="2_45uw8"]
+[ext_resource type="PackedScene" uid="uid://lwhclyiqlwrb" path="res://tscn/elements/void.tscn" id="3_53vu8"]
+[ext_resource type="PackedScene" uid="uid://biqbr0yoxjp21" path="res://tscn/elements/door.tscn" id="4_yc100"]
+[ext_resource type="PackedScene" uid="uid://c4lnt2rbq5opv" path="res://tscn/elements/hider.tscn" id="5_pe7du"]
 
 [node name="world" type="Node2D" unique_id=1387651662]
-script = ExtResource("1_ftrh7")
+script = ExtResource("1_h2jvi")
 metadata/world_id = [0, 0]
 metadata/secret = false
 
 [node name="terrain" type="TileMapLayer" parent="." unique_id=877232229]
 tile_map_data = PackedByteArray("AAAKAAIAAAABAAoAAAAJAAIAAAABAAoAAAAIAAIAAAABAAoAAAAHAAIAAAABAAoAAAAGAAIAAAABAAoAAAAFAAIAAAABAAoAAAAEAAIAAAABAAoAAAADAAIAAAABAAoAAAACAAIAAAABAAoAAAABAAIAAAABAAoAAAAAAAIAAAABAAoAAAD//wIAAAABAAoAAAD+/wIAAAABAAoAAAD9/wIAAAABAAoAAAD8/wIAAAABAAoAAAD7/wIAAAABAAoAAAD6/wIAAAABAAoAAAD5/wIAAAABAAoAAAD4/wIAAAABAAoAAAD3/wIAAAABAAoAAAD2/wIAAAABAAoAAAD3/wMAAAAFAAkAAAD2/wMAAAABAAsAAAD1/wMAAAAAAAsAAAD1/wIAAAAGAAoAAAD1/wEAAAAAAAkAAAD2/wEAAAABAAkAAAD3/wEAAAAFAAsAAAD4/wMAAAABAAsAAAD4/wEAAAABAAkAAAD5/wMAAAAFAAkAAAD5/wEAAAAFAAsAAAD6/wMAAAAFAAkAAAD6/wEAAAAFAAsAAAD7/wMAAAABAAsAAAD7/wEAAAABAAkAAAD8/wMAAAAFAAkAAAD8/wEAAAABAAkAAAD9/wMAAAABAAsAAAD9/wEAAAAFAAsAAAD+/wMAAAABAAsAAAD+/wEAAAAFAAsAAAD//wMAAAABAAsAAAD//wEAAAAFAAsAAAAAAAMAAAAFAAkAAAAAAAEAAAABAAkAAAABAAMAAAAFAAkAAAABAAEAAAABAAkAAAACAAMAAAAFAAkAAAACAAEAAAABAAkAAAADAAMAAAABAAsAAAADAAEAAAAFAAsAAAAEAAMAAAABAAsAAAAEAAEAAAABAAkAAAAFAAMAAAAFAAkAAAAFAAEAAAABAAkAAAAGAAMAAAAFAAkAAAAGAAEAAAAFAAsAAAAHAAMAAAAFAAkAAAAHAAEAAAAFAAsAAAAIAAMAAAAFAAkAAAAIAAEAAAAFAAsAAAAJAAMAAAABAAsAAAAJAAEAAAABAAkAAAAKAAMAAAABAAsAAAAKAAEAAAAFAAsAAAALAAIAAAACAAoAAAALAAMAAAACAAsAAAALAAEAAAACAAkAAAA=")
-tile_set = ExtResource("1_yf6xp")
+tile_set = ExtResource("2_45uw8")
 navigation_enabled = false
 
 [node name="ice" type="TileMapLayer" parent="." unique_id=1007052839]
-tile_set = ExtResource("1_yf6xp")
+tile_set = ExtResource("2_45uw8")
 
 [node name="spikes" type="TileMapLayer" parent="." unique_id=1477348935]
-tile_set = ExtResource("1_yf6xp")
+tile_set = ExtResource("2_45uw8")
 navigation_enabled = false
 
-[node name="void" parent="." unique_id=194799056 instance=ExtResource("2_yf6xp")]
+[node name="void" parent="." unique_id=194799056 instance=ExtResource("3_53vu8")]
 position = Vector2(0, 200)
 
 [node name="keys" type="Node2D" parent="." unique_id=1090130393]
@@ -34,7 +34,7 @@ position = Vector2(0, 200)
 
 [node name="doors" type="Node2D" parent="." unique_id=2075648866]
 
-[node name="door" parent="doors" unique_id=1855782698 instance=ExtResource("4_icesj")]
+[node name="door" parent="doors" unique_id=1855782698 instance=ExtResource("4_yc100")]
 position = Vector2(0, 4)
 
 [node name="crates" type="Node2D" parent="." unique_id=1590887357]
@@ -43,4 +43,4 @@ metadata/secret = false
 
 [node name="enemies" type="Node2D" parent="." unique_id=1140890406]
 
-[node name="hider" parent="." unique_id=1813610698 instance=ExtResource("5_ftrh7")]
+[node name="hider" parent="." unique_id=1813610698 instance=ExtResource("5_pe7du")]
