@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://du0r8j4cgygjt"]
+
+[ext_resource type="Script" uid="uid://cd2xeqfx3hpni" path="res://gd/attempt_counter.gd" id="1_qxo83"]
+
+[node name="attemptCounter" type="Label" unique_id=738367934]
+offset_left = -144.0
+offset_top = -81.0
+offset_right = -104.0
+offset_bottom = -67.0
+script = ExtResource("1_qxo83")

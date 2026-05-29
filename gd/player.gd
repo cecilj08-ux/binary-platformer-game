@@ -69,6 +69,7 @@ func death(cause = "unspecified") -> void:
 	else: emit_particle(eatParticles)
 	await get_tree().create_timer(2.5).timeout
 	Global.can_pause = true
+	Global.attempts += 1
 	get_tree().reload_current_scene.call_deferred()
 
 func emit_particle(particle: GPUParticles2D) -> void:
@@ -79,7 +80,12 @@ func emit_particle(particle: GPUParticles2D) -> void:
 	await emitted_particles.finished
 	emitted_particles.queue_free()
 
-func _ready() -> void: camera.limit_bottom = get_tree().get_first_node_in_group("void").position.y-(new_scale.y*8)
+func _ready() -> void:
+	camera.limit_bottom = get_tree().get_first_node_in_group("void").position.y-(new_scale.y*8)
+	if get_tree().current_scene.has_meta("attempt_counter") and get_tree().current_scene.get_meta("attempt_counter"):
+		var attempt_counter_scene = preload("res://tscn/elements/attempt_counter.tscn")
+		var attemptCounter := attempt_counter_scene.instantiate()
+		add_child(attemptCounter)
 
 func _physics_process(delta: float) -> void:
 # Gravity

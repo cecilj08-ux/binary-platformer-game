@@ -5,7 +5,9 @@ extends Control
 @onready var settings: TextureButton = $texture/margin/buttonsHBox/settings
 @onready var exit: TextureButton = $texture/margin/buttonsHBox/exit
 
-func _process(_delta: float) -> void: get_parent().visible = get_tree().paused and Global.can_pause
+func _process(_delta: float) -> void:
+	get_parent().visible = get_tree().paused and Global.can_pause
+	
 
 func _on_unpause_pressed() -> void: get_tree().paused = false
 func _on_restart_pressed() -> void:

@@ -1,5 +1,7 @@
 class_name SaveGame extends Resource
 
+@export var attempts_list := {}
+
 @export var unlocked_stages := {
 	0:[],
 	1:[],
