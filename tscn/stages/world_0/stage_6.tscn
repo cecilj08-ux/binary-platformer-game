@@ -11,7 +11,7 @@
 
 [node name="world" type="Node2D" unique_id=1387651662]
 script = ExtResource("1_7vfne")
-metadata/world_id = [0, 0]
+metadata/world_id = [0, 6]
 metadata/secret = false
 
 [node name="terrain" type="TileMapLayer" parent="." unique_id=877232229]

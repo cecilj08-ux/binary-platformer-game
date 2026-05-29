@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://c08lceq8f0pg1"]
 
+[ext_resource type="Script" uid="uid://c1u23bk10sx8j" path="res://gd/world.gd" id="1_ibf2u"]
 [ext_resource type="TileSet" uid="uid://b3vljxh3uv2w" path="res://tileset.tres" id="1_rpqev"]
 [ext_resource type="PackedScene" uid="uid://lwhclyiqlwrb" path="res://tscn/elements/void.tscn" id="2_ibf2u"]
 [ext_resource type="PackedScene" uid="uid://cxe5yfrayctoo" path="res://tscn/elements/enemy_slime.tscn" id="3_r25ll"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4lnt2rbq5opv" path="res://tscn/elements/hider.tscn" id="8_f6oq0"]
 
 [node name="world" type="Node2D" unique_id=1387651662]
+script = ExtResource("1_ibf2u")
 metadata/world_id = [0, 8]
 metadata/secret = false
 
@@ -93,7 +95,7 @@ destination = "res://tscn/stages/world_0/secret_3.tscn"
 [node name="door2" parent="doors" unique_id=575783656 instance=ExtResource("6_0hykb")]
 position = Vector2(-42, -76)
 door_id = 2
-destination = "res://tscn/stages/world_0/stage_selection_0.tscn"
+destination = "res://tscn/stages/world_0/world_0_completion.tscn"
 
 [node name="door3" parent="doors" unique_id=1068671360 instance=ExtResource("6_0hykb")]
 position = Vector2(252, 84)

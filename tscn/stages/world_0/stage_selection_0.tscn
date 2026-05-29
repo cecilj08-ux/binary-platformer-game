@@ -27,42 +27,42 @@ position = Vector2(0, 200)
 [node name="gate" parent="gates" unique_id=603030376 instance=ExtResource("3_vh8as")]
 position = Vector2(-24, -24)
 height = 4
-stage = 1
+stage = 2
 
 [node name="gate2" parent="gates" unique_id=750235547 instance=ExtResource("3_vh8as")]
 position = Vector2(24, -24)
 height = 4
-stage = 2
+stage = 3
 
 [node name="gate3" parent="gates" unique_id=765123951 instance=ExtResource("3_vh8as")]
 position = Vector2(72, -24)
 height = 4
-stage = 3
+stage = 4
 
 [node name="gate4" parent="gates" unique_id=171896584 instance=ExtResource("3_vh8as")]
 position = Vector2(120, -24)
 height = 4
-stage = 4
+stage = 5
 
 [node name="gate5" parent="gates" unique_id=480107092 instance=ExtResource("3_vh8as")]
 position = Vector2(168, -24)
 height = 4
-stage = 5
+stage = 6
 
 [node name="gate6" parent="gates" unique_id=908812074 instance=ExtResource("3_vh8as")]
 position = Vector2(216, -24)
 height = 4
-stage = 6
+stage = 7
 
 [node name="gate7" parent="gates" unique_id=369507818 instance=ExtResource("3_vh8as")]
 position = Vector2(264, -24)
 height = 4
-stage = 7
+stage = 8
 
 [node name="gate8" parent="gates" unique_id=636271677 instance=ExtResource("3_vh8as")]
 position = Vector2(312, -24)
 height = 4
-stage = 8
+stage = 9
 
 [node name="doors" type="Node2D" parent="." unique_id=109844834]
 

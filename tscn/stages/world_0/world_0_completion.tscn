@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cri8ybyrlqgow"]
+
+[ext_resource type="Script" uid="uid://c1u23bk10sx8j" path="res://gd/world.gd" id="1_5w5mb"]
+
+[node name="world0Completion" type="Node2D" unique_id=373557725]
+script = ExtResource("1_5w5mb")
+metadata/world_id = [0, 9]
+metadata/redirect = "res://tscn/stages/world_0/stage_selection_0.tscn"
