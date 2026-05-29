@@ -107,6 +107,7 @@ destination = "res://tscn/stages/world_0/secret_4.tscn"
 position = Vector2(-128, -96)
 scale = Vector2(1.8, 1.8)
 speed = 140
+jump_power = 280
 detection_range = 500
 
 [node name="enemy_slime2" parent="enemies" unique_id=1846201323 instance=ExtResource("3_r25ll")]

@@ -57,3 +57,9 @@ writing = "Moving spikes like these dont hurt you.
 (Trust)
 -DaPotat70"
 reading_time = 6
+
+[node name="door" parent="." unique_id=210562157 instance=ExtResource("4_yc100")]
+position = Vector2(348, 4)
+door_id = 2
+destination_id = 1
+destination = "res://tscn/stages/world_0/stage_8.tscn"
