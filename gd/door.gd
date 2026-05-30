@@ -3,6 +3,11 @@ class_name Door extends Sprite2D
 @export var door_id := 1
 @export var destination_id: int
 @export_file_path("*.tscn") var destination
+@export_category("World selector specific")
+@export var world: int
+@export var stage: int
+@export var secret_stage: bool
+
 var keys_required := 0
 var has_activator := false
 var opened := false
@@ -26,7 +31,14 @@ func _ready() -> void:
 			player.new_scale = Global.p_scale
 			player.scale = Global.p_scale
 			get_tree().current_scene.add_child.call_deferred(player) # HACK: Is there a less redundant way to put it at the bottom of the scene tree?
-		if keys_required == 0 and destination and not has_activator:
+		if stage != 0:
+			if secret_stage and stage in SaveManager.save_game.unlocked_secrets[world]: 
+				await get_tree().create_timer(0.5).timeout
+				open()
+			elif stage in SaveManager.save_game.unlocked_stages[world]: 
+				await get_tree().create_timer(0.5).timeout
+				open()
+		elif keys_required == 0 and destination and not has_activator:
 			await get_tree().create_timer(0.5).timeout
 			open()
 
