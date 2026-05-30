@@ -1,7 +1,6 @@
 extends Control
 
 func _ready() -> void:
-	Global.destination = 0 # This is so testing can be done per scene when debugging
 	Global.destination = 0
 	Global.title_screen = true
 

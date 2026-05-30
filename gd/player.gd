@@ -136,7 +136,6 @@ func _physics_process(delta: float) -> void:
 	if scale <= Vector2(0.25,0.25) and not dead: death("small")
 # Camera
 	if camera.position != Vector2.ZERO: camera.position = lerp(camera.position, Vector2.ZERO, delta)
-	#camera.position = lerp(camera.position, get_local_mouse_position()/4, delta*5)
 
 func _on_coyote_timer_timeout() -> void: was_on_wall = false
 
