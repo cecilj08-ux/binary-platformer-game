@@ -7,6 +7,7 @@ class_name Player extends CharacterBody2D
 @onready var eatParticles := $eatParticles
 @onready var bleedParticles := $bleedParticles
 @onready var fallParticles := $fallParticles
+@onready var chargeParticles := $chargeParticles
 @onready var camera := $Camera2D
 @onready var new_scale := scale # NOTE: Use this instead of scale for calculations
 
@@ -29,6 +30,7 @@ var dead := false
 const jump_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_jump_h.png")
 const walk_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_walk_h.png")
 const wall_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_wall_h.png")
+const crouch_sprite := preload("res://resources/1bit slime platformer/hybrid_bg/slime_crouch_h.png")
 
 func apply_gravity(delta: float) -> void: velocity += get_gravity() * (delta if Input.is_action_pressed("up") else delta*3)
 
@@ -100,27 +102,23 @@ func _physics_process(delta: float) -> void:
 # Coyote Timing
 	if is_on_floor() or is_on_wall(): coyoteTime.start()
 	can_jump = coyoteTime.time_left != 0 and velocity.y >= 0 and sprite.visible
-# Jump and drop
-	if Input.is_action_pressed("left"): print(is_on_wall_only())
+# Super Jump
 	if charge_Jump == 1.5:
-		#put particles here
 		if Input.is_action_just_pressed("up"):
+			emit_particle(fallParticles)
 			velocity.y = -((jump_power) + (scale.x-1)*25)*2
 			charge_Jump = 0
 			can_jump = false
-			print("now")
 			new_scale = calculate_vector_areas(new_scale, Vector2.ONE, true)
 			new_scale.x = sqrt(round(new_scale.x**2))
 			new_scale.y = sqrt(round(new_scale.y**2))
-	if Input.is_action_pressed("down") and can_jump and charge_Jump <=1.5 and !is_on_wall_only() and new_scale.x > 1: 
+	if Input.is_action_pressed("down") and can_jump and charge_Jump <= 1.5 and !is_on_wall_only() and new_scale.x > 1 and not direction: 
 		charge_Jump += delta
 		if charge_Jump > 1.5: charge_Jump = 1.5
-		can_walk = false
-	elif charge_Jump >= 0:
-		charge_Jump -= delta*2
-		can_walk=true
-		if charge_Jump < 0: charge_Jump = 0
-	else: can_walk = true
+		#can_walk = false
+	elif charge_Jump > 0: charge_Jump -= delta*2
+	#else: can_walk = true
+# Jump and drop
 	if Input.is_action_just_pressed("up") and can_jump:
 		if is_on_wall_only() and can_stick:
 			sprite.flip_h = not sprite.flip_h
@@ -130,6 +128,7 @@ func _physics_process(delta: float) -> void:
 	set_collision_mask_value(4, not Input.is_action_pressed("down"))
 # Movement
 	direction = Input.get_axis("left", "right") if can_walk else 0.0
+	if direction: charge_Jump = 0
 	lerpWeight = delta*(acceleration if direction else friction)
 	velocity.x = lerp(velocity.x, direction*speed, lerpWeight)
 	move_and_slide()
@@ -138,7 +137,10 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x > 0 and not is_on_wall(): sprite.flip_h = false
 	ani.speed_scale = 1+abs(velocity.x)*0.075
 	if is_on_floor():
-		if abs(velocity.x) < 10 and is_on_floor(): ani.play("idle")
+		if charge_Jump > 0:
+			ani.stop()
+			sprite.texture = crouch_sprite
+		elif abs(velocity.x) < 10: ani.play("idle")
 		elif direction: ani.play("walk")
 	elif not is_on_floor():
 		ani.stop()
@@ -152,6 +154,7 @@ func _physics_process(delta: float) -> void:
 			if velocity.y < -100: sprite.frame = 1
 			elif velocity.y < 100: sprite.frame = 2
 			elif velocity.y > 100: sprite.frame = 3
+	chargeParticles.emitting = true if charge_Jump >= 1.5 else false
 # Size scaling
 	if new_scale != scale: scale = scale.move_toward(new_scale, delta)
 	if scale <= Vector2(0.25,0.25) and not dead: death("small")

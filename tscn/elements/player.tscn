@@ -174,6 +174,16 @@ collision_friction = 1.0
 collision_bounce = 0.0
 collision_use_scale = true
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vtaxf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(5, 0, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 6.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 9.8, 0)
+
 [node name="player" type="CharacterBody2D" unique_id=794086276]
 collision_layer = 54
 collision_mask = 9
@@ -242,6 +252,13 @@ explosiveness = 1.0
 fixed_fps = 0
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_hsluc")
+
+[node name="chargeParticles" type="GPUParticles2D" parent="." unique_id=283040906]
+position = Vector2(0, 4)
+emitting = false
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_vtaxf")
 
 [connection signal="body_entered" from="playerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="playerHitbox" to="." method="_on_player_hitbox_body_exited"]
