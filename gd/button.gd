@@ -12,8 +12,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if (body is Player and body.new_scale >= scale) or ((body is Enemy or body is Crate) and body.scale >= scale):
 		total_collisions += 1
 		pressed = true
-		set_collision_layer_value(1, false)
-		set_collision_layer_value(6, false)
+		#set_collision_layer_value(1, false)
+		#set_collision_layer_value(6, false)
 		sprite.frame = 1
 		if activates is Door: activates.open()
 		if activates is Gate: activates.opening = true
@@ -26,8 +26,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		total_collisions -= 1
 		if total_collisions > 0: return
 		pressed = false
-		set_collision_layer_value(1, true)
-		set_collision_layer_value(6, true)
+		#set_collision_layer_value(1, true)
+		#set_collision_layer_value(6, true)
 		if not one_shot:
 			sprite.frame = 0
 			if activates is Door: activates.close()

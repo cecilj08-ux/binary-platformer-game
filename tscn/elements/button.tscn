@@ -11,7 +11,7 @@ region = Rect2(0, 8, 0, 8)
 size = Vector2(4, 2)
 
 [node name="button" type="StaticBody2D" unique_id=950202459]
-collision_layer = 33
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("2_ohq4r")
 
