@@ -6,6 +6,8 @@
 .import/
 export.cfg
 export_credentials.cfg
+config.gdbuild
+export_presets.cfg
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -18,3 +20,6 @@ mono_crash.*.json
 # MacOS ignores
 .DS_Store
 _MACOSX
+
+# Release .zip ignores
+web_release.zip

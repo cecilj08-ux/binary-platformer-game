@@ -84,7 +84,7 @@ func emit_particle(particle: GPUParticles2D) -> void:
 	emitted_particles.queue_free()
 
 func _ready() -> void:
-	camera.limit_bottom = get_tree().get_first_node_in_group("void").position.y-(new_scale.y*8)
+	if not get_tree().get_nodes_in_group("void").is_empty(): camera.limit_bottom = get_tree().get_first_node_in_group("void").position.y-(new_scale.y*8)
 	if get_tree().current_scene.has_meta("attempt_counter") and get_tree().current_scene.get_meta("attempt_counter"):
 		var attempt_counter_scene = preload("res://tscn/elements/attempt_counter.tscn")
 		var attemptCounter := attempt_counter_scene.instantiate()

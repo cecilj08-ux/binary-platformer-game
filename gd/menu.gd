@@ -1,8 +1,12 @@
 extends Control
 
+@onready var start := $buttons/Start
+@onready var quit := $buttons/Quit
+
 func _ready() -> void:
 	Global.destination = 0
 	Global.title_screen = true
+	quit.disabled = OS.get_name() == "Web"
 
 func _on_start_pressed() -> void:
 	Global.title_screen = false
