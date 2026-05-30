@@ -137,6 +137,21 @@ position = Vector2(0, -3.5)
 target_position = Vector2(-4, 0)
 collision_mask = 32
 
+[node name="upRay" type="RayCast2D" parent="." unique_id=1529821333]
+position = Vector2(-3.5, -3.5)
+target_position = Vector2(0, -4)
+collision_mask = 32
+
+[node name="upRay2" type="RayCast2D" parent="." unique_id=1677972215]
+position = Vector2(0, -3.5)
+target_position = Vector2(0, -4)
+collision_mask = 32
+
+[node name="upRay3" type="RayCast2D" parent="." unique_id=1377754166]
+position = Vector2(3.5, -3.5)
+target_position = Vector2(0, -4)
+collision_mask = 32
+
 [node name="rightRay" type="RayCast2D" parent="." unique_id=1114542725]
 position = Vector2(0, 3.5)
 target_position = Vector2(4, 0)
