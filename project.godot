@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Slimin' It"
-run/main_scene="uid://bdnhlq2dt60gy"
+run/main_scene="uid://0pgc4uiqmf6a"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://0bojmasdl8x1"
 run/name="Slimin' It"
