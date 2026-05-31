@@ -115,9 +115,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("down") and can_jump and charge_Jump <= 1.5 and !is_on_wall_only() and new_scale.x > 1 and not direction: 
 		charge_Jump += delta
 		if charge_Jump > 1.5: charge_Jump = 1.5
-		#can_walk = false
 	elif charge_Jump > 0: charge_Jump -= delta*2
-	#else: can_walk = true
 # Jump and drop
 	if Input.is_action_just_pressed("up") and can_jump:
 		if is_on_wall_only() and can_stick:
