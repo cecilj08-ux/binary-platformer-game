@@ -33,8 +33,8 @@ position = Vector2(0, 200)
 position = Vector2(-88, -56)
 rotation = 1.5707964
 height = 7
-open_speed = 3
-close_speed = 3
+open_speed = 40
+close_speed = 40
 
 [node name="gate2" parent="gates" unique_id=982489690 instance=ExtResource("4_ct0og")]
 position = Vector2(-88, 0)
@@ -43,15 +43,15 @@ height = 3
 [node name="gate3" parent="gates" unique_id=603030376 instance=ExtResource("4_ct0og")]
 position = Vector2(344, -144)
 height = 9
-open_speed = 7
-close_speed = 7
+open_speed = 84
+close_speed = 84
 
 [node name="gate4" parent="gates" unique_id=330861468 instance=ExtResource("4_ct0og")]
 position = Vector2(304, -64)
 rotation = -3.1415925
 height = 9
-open_speed = 7
-close_speed = 7
+open_speed = 84
+close_speed = 84
 
 [node name="buttons" type="Node2D" parent="." unique_id=739270828]
 

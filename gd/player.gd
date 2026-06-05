@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() or is_on_wall(): coyoteTime.start()
 	can_jump = coyoteTime.time_left != 0 and velocity.y >= 0 and sprite.visible
 # Super Jump
-	if charge_Jump == 1.5:
+	if charge_Jump == 0.75:
 		if Input.is_action_just_pressed("up"):
 			emit_particle(fallParticles)
 			velocity.y = -((jump_power) + (scale.x-1)*25)*2
@@ -112,9 +112,9 @@ func _physics_process(delta: float) -> void:
 			new_scale = calculate_vector_areas(new_scale, Vector2.ONE, true)
 			new_scale.x = sqrt(round(new_scale.x**2))
 			new_scale.y = sqrt(round(new_scale.y**2))
-	if Input.is_action_pressed("down") and can_jump and charge_Jump <= 1.5 and !is_on_wall_only() and new_scale.x > 1 and not direction: 
+	if Input.is_action_pressed("down") and can_jump and charge_Jump <= 0.75 and !is_on_wall_only() and new_scale.x > 1 and not direction: 
 		charge_Jump += delta
-		if charge_Jump > 1.5: charge_Jump = 1.5
+		if charge_Jump > 0.75: charge_Jump = 0.75
 	elif charge_Jump > 0: charge_Jump -= delta*2
 # Jump and drop
 	if Input.is_action_just_pressed("up") and can_jump:
@@ -139,7 +139,7 @@ func _physics_process(delta: float) -> void:
 			ani.stop()
 			sprite.texture = crouch_sprite
 		elif abs(velocity.x) < 10: ani.play("idle")
-		elif direction: ani.play("walk")
+		elif abs(velocity.x) >= 10: ani.play("walk")
 	elif not is_on_floor():
 		ani.stop()
 		if is_on_wall() and can_stick:
@@ -152,7 +152,7 @@ func _physics_process(delta: float) -> void:
 			if velocity.y < -100: sprite.frame = 1
 			elif velocity.y < 100: sprite.frame = 2
 			elif velocity.y > 100: sprite.frame = 3
-	chargeParticles.emitting = true if charge_Jump >= 1.5 else false
+	chargeParticles.emitting = true if charge_Jump >= 0.75 else false
 # Size scaling
 	if new_scale != scale: scale = scale.move_toward(new_scale, delta)
 	if scale <= Vector2(0.25,0.25) and not dead: death("small")
