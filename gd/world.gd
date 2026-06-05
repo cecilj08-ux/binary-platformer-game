@@ -18,4 +18,11 @@ func _ready() -> void:
 		if not get_meta("world_id")[1] in SaveManager.save_game.unlocked_stages[get_meta("world_id")[0]]:
 			SaveManager.save_game.unlocked_stages[get_meta("world_id")[0]].append(get_meta("world_id")[1])
 			SaveManager.save()
-	if has_meta("redirect"): get_tree().change_scene_to_file(get_meta("redirect"))
+	if has_meta("redirect"): 
+		if has_meta("end_time_trial"):
+			if Global.time_taken <= Global.time_limit:
+				var time: float
+				time = (floor(Global.time_taken*100))/100
+				SaveManager.save_game.trial_times [get_meta("world_id")[0]] = time
+				SaveManager.save()
+		get_tree().change_scene_to_file(get_meta("redirect"))

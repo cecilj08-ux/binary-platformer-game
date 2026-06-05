@@ -1,8 +1,12 @@
-[gd_scene format=3 uid="uid://cri8ybyrlqgow"]
+[gd_scene format=3 uid="uid://brvfq85814nsf"]
 
 [ext_resource type="Script" uid="uid://c1u23bk10sx8j" path="res://gd/world.gd" id="1_5w5mb"]
+[ext_resource type="PackedScene" uid="uid://biqbr0yoxjp21" path="res://tscn/elements/door.tscn" id="2_l6uq4"]
 
 [node name="world0Completion" type="Node2D" unique_id=373557725]
 script = ExtResource("1_5w5mb")
 metadata/world_id = [0, 9]
 metadata/redirect = "res://tscn/stages/world_0/stage_selection_0.tscn"
+metadata/end_time_trial = true
+
+[node name="door" parent="." unique_id=1855782698 instance=ExtResource("2_l6uq4")]

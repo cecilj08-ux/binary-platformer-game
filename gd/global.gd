@@ -1,4 +1,8 @@
 extends Node
+
+var time_limit: float
+var time_trial: bool
+var time_taken: float
 var destination := 1
 var title_screen := false
 var can_pause := true
@@ -12,11 +16,18 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var pause_menu := pause_menu_scene.instantiate()
 	get_tree().current_scene.add_sibling.call_deferred(pause_menu)
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset") and not title_screen:
 		get_tree().paused = false
 		Global.can_pause = true
 		if get_tree().current_scene.has_meta("attempt_counter") and get_tree().current_scene.get_meta("attempt_counter"): attempts += 1
-		get_tree().reload_current_scene()
+		if Global.time_trial:
+			Global.time_trial = false
+			Global.time_limit = 0.0
+			Global.time_taken = 0.0
+			get_tree().change_scene_to_file("res://tscn/stages/world_" + str(get_tree().current_scene.get_meta("world_id")[0]) + "/" + "stage_selection_" + str(get_tree().current_scene.get_meta("world_id")[0]) + ".tscn")
+		get_tree().reload_current_scene.call_deferred()
 	if Input.is_action_just_pressed("esc") and can_pause and not title_screen:
 		get_tree().paused = not get_tree().paused
+	if time_trial: time_taken += (delta)
+		

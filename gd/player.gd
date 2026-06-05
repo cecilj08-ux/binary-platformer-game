@@ -73,7 +73,13 @@ func death(cause = "unspecified") -> void:
 	await get_tree().create_timer(2.5).timeout
 	Global.can_pause = true
 	Global.attempts += 1
-	get_tree().reload_current_scene.call_deferred()
+	if Global.time_trial:
+		Global.time_trial = false
+		Global.time_limit = 0.0
+		Global.time_taken = 0.0
+		get_tree().change_scene_to_file("res://tscn/stages/world_" + str(get_tree().current_scene.get_meta("world_id")[0]) + "/" + "stage_selection_" + str(get_tree().current_scene.get_meta("world_id")[0]) + ".tscn")
+	else:
+		get_tree().reload_current_scene.call_deferred()
 
 func emit_particle(particle: GPUParticles2D) -> void:
 	var emitted_particles := particle.duplicate()
@@ -89,6 +95,9 @@ func _ready() -> void:
 		var attempt_counter_scene = preload("res://tscn/elements/attempt_counter.tscn")
 		var attemptCounter := attempt_counter_scene.instantiate()
 		add_child(attemptCounter)
+	if !get_tree().current_scene.has_meta("world_id"): 
+		Global.time_trial = false
+		Global.time_limit = 0.0
 
 func _physics_process(delta: float) -> void:
 # Gravity

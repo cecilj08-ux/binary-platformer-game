@@ -43,6 +43,9 @@ func _ready() -> void:
 			open()
 
 func _on_enter_box_body_entered(body: Node2D) -> void:
+	if has_meta("time_trial") and get_meta("time_trial"): 
+		Global.time_trial = true
+		Global.time_limit = get_meta("time_limit")
 	if body is Player and opened and body.new_scale <= scale and body.new_scale > Vector2(0.25,0.25):
 		Global.can_pause = false
 		get_tree().paused = true

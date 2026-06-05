@@ -10,6 +10,8 @@ size = Vector2(2, 2)
 texture = ExtResource("1_dplo7")
 vframes = 2
 script = ExtResource("2_mairw")
+metadata/time_trial = false
+metadata/time_limit = 0.0
 
 [node name="enterBox" type="Area2D" parent="." unique_id=648184703]
 collision_layer = 4

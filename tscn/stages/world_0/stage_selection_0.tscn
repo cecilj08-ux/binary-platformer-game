@@ -68,62 +68,66 @@ stage = 9
 
 [node name="door" parent="doors" unique_id=1855782698 instance=ExtResource("4_otvoo")]
 position = Vector2(-44, 28)
+door_id = 2
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_1.tscn"
 
 [node name="door2" parent="doors" unique_id=521521016 instance=ExtResource("4_otvoo")]
 position = Vector2(4, 28)
-door_id = 2
+door_id = 3
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_2.tscn"
 stage = 2
 
 [node name="door3" parent="doors" unique_id=1219075595 instance=ExtResource("4_otvoo")]
 position = Vector2(52, 28)
-door_id = 3
+door_id = 4
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_3.tscn"
 stage = 3
 
 [node name="door4" parent="doors" unique_id=1933169242 instance=ExtResource("4_otvoo")]
 position = Vector2(100, 28)
-door_id = 4
+door_id = 5
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_4.tscn"
 stage = 4
 
 [node name="door5" parent="doors" unique_id=574892756 instance=ExtResource("4_otvoo")]
 position = Vector2(148, 28)
-door_id = 5
+door_id = 6
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_5.tscn"
 stage = 5
 
 [node name="door6" parent="doors" unique_id=509188430 instance=ExtResource("4_otvoo")]
 position = Vector2(196, 28)
-door_id = 6
+door_id = 7
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_6.tscn"
 stage = 6
 
 [node name="door7" parent="doors" unique_id=1853389225 instance=ExtResource("4_otvoo")]
 position = Vector2(244, 28)
-door_id = 7
+door_id = 8
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_7.tscn"
 stage = 7
 
 [node name="door8" parent="doors" unique_id=98454601 instance=ExtResource("4_otvoo")]
 position = Vector2(292, 28)
-door_id = 8
+door_id = 9
 destination_id = 1
 destination = "res://tscn/stages/world_0/stage_8.tscn"
 stage = 8
 
 [node name="door9" parent="doors" unique_id=625995951 instance=ExtResource("4_otvoo")]
 position = Vector2(340, 28)
-door_id = 9
+door_id = 10
 destination_id = 1
+destination = "res://tscn/stages/world_0/stage_1.tscn"
+metadata/time_trial = true
+metadata/time_limit = 55.0
 
 [node name="signs" type="Node2D" parent="." unique_id=2139918694]
 
@@ -161,8 +165,7 @@ writing = "Stage 8"
 
 [node name="sign9" parent="signs" unique_id=431458264 instance=ExtResource("5_mw8sv")]
 position = Vector2(340, 4)
-writing = "Time Trial
-(Coming soon)"
+writing = "Time Trial"
 
 [node name="player" parent="." unique_id=1218267728 instance=ExtResource("6_hik47")]
 position = Vector2(-64, 4)
